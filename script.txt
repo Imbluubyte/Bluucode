@@ -1,2 +1,0 @@
-declare var1 15
-printline add var1 sub 5 2
