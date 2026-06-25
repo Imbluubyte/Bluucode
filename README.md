@@ -1,6 +1,5 @@
 **Usage Instructions:**
-To write scripts, create a file with the **.bluc** file extension, E.g. script.bluc
-To run code, open a terminal window and navigate to the directory containing bluc.py and interpreter.py. Make sure your script file is in the same directory as these files. Then simply run py bluc.py run scriptname.bluc
+Run ide.py and it's easy from there
 
 **Syntax:**
 printline(output) - Prints a line of output to the console.
