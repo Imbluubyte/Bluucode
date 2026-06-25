@@ -3,6 +3,9 @@ from pathlib import Path
 import sys
 
 def run_file(filename):
+    global output_buffer
+
+    output_buffer = []
     file = Path(filename)
 
     if not file.exists():
@@ -18,11 +21,13 @@ def run_file(filename):
         tokens = tokenize(line)
         if tokens:
             parse(tokens)
+    return '\n'.join(output_buffer)
 
 variables = {}
+output_buffer = []
 
 def printline(output):
-    print(output)
+    output_buffer.append(str(output))
 
 def add(x, y):
     ans = int(x) + int(y)
@@ -38,12 +43,19 @@ def declare(var, val):
 def rng(x, y):
     return random.randint(int(x), int(y))
 
+def equal(x, y):
+    return x == y
+
+
+
+
 syntax = {
     'printline': printline,
     'add': add,
     'sub': sub,
     'declare': declare,
-    'rng': rng
+    'rng': rng,
+    'equal': equal
 }
 
 
@@ -113,8 +125,14 @@ def parse(tokens):
     if token in variables:
         return variables[token]
     
+    try:
+        return int(token)
+    except ValueError:
+        pass
+
     if token.startswith('"') and token.endswith('"'):
         return token[1: -1]
+    
 
     return token
 
